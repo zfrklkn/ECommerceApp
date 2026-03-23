@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ECommerceApp.Application.DTOs;
+using MediatR;
 
-namespace ECommerceApp.Application.Features.Products.Queries.GetAllProducts
-{
-    internal class GetAllProductsQuery
-    {
-    }
-}
+namespace ECommerceApp.Application.Features.Products.Queries.GetAllProducts;
+
+public record GetAllProductsQuery : IRequest<List<ProductDto>>;

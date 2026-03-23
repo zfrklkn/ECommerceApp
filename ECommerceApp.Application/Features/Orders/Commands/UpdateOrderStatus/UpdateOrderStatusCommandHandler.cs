@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Domain.Enums;
+﻿using ECommerceApp.Application.Exceptions;
+using ECommerceApp.Domain.Enums;
 using ECommerceApp.Domain.Interfaces;
 using MediatR;
 
