@@ -42,6 +42,8 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int
                 UnitPrice = product.Price
             };
             totalAmount += orderItem.Quantity * orderItem.UnitPrice;
+
+            orderItems.Add(orderItem);
         }
 
         var order = new Order
