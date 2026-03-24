@@ -1,30 +1,31 @@
 ﻿using ECommerceApp.Application.DTOs;
+using ECommerceApp.Application.Interfaces;
 using ECommerceApp.Infrastructure.Persistence;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace ECommerceApp.Application.Features.Orders.Queries.GetUserOrders;
+namespace ECommerceApp.Infrastructure.Services;
 
-public class GetUserOrdersQueryHandler : IRequestHandler<GetUserOrdersQuery, List<OrderDto>>
+public class OrderQueryService : IOrderQueryService
 {
     private readonly AppDbContext _context;
 
-    public GetUserOrdersQueryHandler(AppDbContext context)
+    public OrderQueryService(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<List<OrderDto>> Handle(GetUserOrdersQuery request, CancellationToken cancellationToken)
+    public async Task<List<OrderDto>> GetUserOrdersAsync(int userId, CancellationToken cancellationToken)
     {
         var orders = await _context.Orders
-            .Where(o => o.UserId == request.UserId)
+            .AsNoTracking()
             .Include(o => o.OrderItems)
             .ThenInclude(i => i.Product)
+            .Where(o => o.UserId == userId)
             .OrderByDescending(o => o.CreatedAt)
             .ToListAsync(cancellationToken);
 
-        return orders.Select(o => new OrderDto(
-
+        return orders.Select(o => new OrderDto
+        (
             o.Id,
             o.Status,
             o.TotalAmount,
