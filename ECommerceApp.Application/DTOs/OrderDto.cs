@@ -11,7 +11,7 @@ public record OrderDto(
 );
 
 public record OrderItemDto(
-    string ProductName,
+    string? ProductName,
     decimal UnitPrice,
     int Quantity
 );

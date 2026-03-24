@@ -1,9 +1,11 @@
 using ECommerceApp.API.Middleware;
 using ECommerceApp.Application.Behaviors;
 using ECommerceApp.Application.Features.Products.Commands.CreateProduct;
+using ECommerceApp.Application.Interfaces;
 using ECommerceApp.Domain.Interfaces;
 using ECommerceApp.Infrastructure.Persistence;
 using ECommerceApp.Infrastructure.Repositories;
+using ECommerceApp.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateProductCommand).Assembly));
 builder.Services.AddValidatorsFromAssembly(typeof(CreateProductCommand).Assembly);
