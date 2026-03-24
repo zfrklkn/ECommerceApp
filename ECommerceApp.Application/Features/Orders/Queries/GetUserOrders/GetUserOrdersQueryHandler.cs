@@ -1,6 +1,5 @@
 ﻿using ECommerceApp.Application.DTOs;
 using ECommerceApp.Application.Interfaces;
-using ECommerceApp.Domain.Interfaces;
 using MediatR;
 
 namespace ECommerceApp.Application.Features.Orders.Queries.GetUserOrders;
