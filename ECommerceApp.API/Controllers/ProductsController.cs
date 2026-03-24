@@ -13,7 +13,7 @@ public class ProductsController : ControllerBase
 
     public ProductsController(IMediator mediator)
     {
-        mediator = _mediator;
+        _mediator = mediator;
     }
 
     //[HttpGet]
